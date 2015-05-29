@@ -1,15 +1,15 @@
-=== Two Image Responsive Slider ===
+=== Dual Size Responsive Slider ===
 Contributors: Hiroki Kanazawa
 Tags: slider,slider show,responsive,image
-Requires at least: 3.0.0
+Requires at least: 3.5
 Tested up to: 4.2.2
 License: GPLv2 or later
-Stable tag: trunk
+Stable Tag: 1.1.0
 
-This plugin displays slide show for responsive using FlexSlider2. You can set 2 images whose size is different, size for PC and smart phone.
+This plugin displays slide show for responsive using FlexSlider2. You can set 2 images its size is different, size for PC and smart phone.
 
 == Description ==
-Responsive Slider is plugin to display HTML and Javascript for Flexslider2. You can use another image whose size is different when screen width is small. It is effective to load page.
+Responsive Slider is plugin to display HTML and Javascript for Flexslider2. You can use small size image when screen width is small. It is effective to load page.
 
 * You can set Large Slide size in option page.
 * You can set Small Slide size in option page.
@@ -20,11 +20,21 @@ Responsive Slider is plugin to display HTML and Javascript for Flexslider2. You 
 
 
 == Installation ==
-1. Upload "two-image-responsive-slider" directory to the "/wp-content/plugins/" directory
+1. Upload "dual-size-responsive-slider" directory to the "/wp-content/plugins/" directory
 2. Activate the plugin through the "Plugins" menu in WordPress
 3. Then plugin will create post type "responsive-slider", add new slide through the "Slider" menu 
 4. Use shortcode "responsive-slider" or function "responsive_slider"
 
+== Screenshots ==
+1. Admin page for edit slide post
+2. Admin page for edit slider post
+3. Sliders list in admin
+
 == Changelog ==
+= 1.1 =
+* Rename plugin name from Two Image Responsive Slider to Dual Size Responsive Slider.
+* "slide link" custom field is added at Slide post.
+* Some file names are changed.
+
 = 1.0 =
-* Initial version
+* Initial version.

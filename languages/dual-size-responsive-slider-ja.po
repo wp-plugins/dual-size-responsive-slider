@@ -3,9 +3,9 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Two Image Responsive Slider Pot v1.0.0\n"
+"Project-Id-Version: Dual Size Responsive Slider Pot v1.0.0\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2015-05-14 18:02+0900\n"
+"POT-Creation-Date: 2015-05-25 15:20+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Your Name <you@example.com>\n"
 "Language-Team: Online-inc <kanazawa@online-inc.jp>\n"
@@ -84,41 +84,21 @@ msgstr "スライド画像"
 #, php-format
 msgid "Using shortcode %s or function %s, you can display this slider."
 msgstr ""
-"関数 %s または %s のショート コードを使用することで、このスライダーを表示で"
-"きます。"
+"ショートコード %s または %s の関数を使用することで、このスライダーを表示でき"
+"ます。"
 
 #: admin/admin-class.php:258 admin/admin-class.php:275
 #, php-format
 msgid "Parent Attribute of Slide %1$s (post ID: %2$s) is also updated."
 msgstr "スライド \"%1$s\" (投稿ID: %2$s) の親属性を更新しました。"
 
-#: admin/metabox.php:40
-msgid "Choose from Media Uploader"
-msgstr "メディアアップローダーから選択"
-
-#: admin/metabox.php:40
-msgid "Choose Image"
-msgstr "この画像を選択"
-
-#: admin/metabox.php:41
-msgid "Unset this Image"
-msgstr "選択を解除"
-
-#: admin/metabox.php:43 admin/metabox.php:45
-msgid "Width"
-msgstr "横幅"
-
-#: admin/metabox.php:43 admin/metabox.php:45
-msgid "Height"
-msgstr "縦幅"
-
 #: admin/option-page.php:4
 #, php-format
 msgid ""
 "Using shortcode %s or function %s, you can display slider having all slides."
 msgstr ""
-"関数 %s または %s のショート コードを用いることで、全スライドを使用したスラ"
-"イダーを表示できます。"
+"ショートコード %s または %s の関数を用いることで、全スライドを使用したスライ"
+"ダーを表示できます。"
 
 #: admin/option-page.php:40
 msgid ""
@@ -128,27 +108,27 @@ msgstr ""
 "デバイスの画面幅の境界値です。画面幅がこの値より大きいとPC向け、小さいとスマ"
 "ホ向けの画像がスライダーに用いられます。"
 
-#: admin/option-page.php:52 admin/slider-option-meta-box.php:11
+#: admin/option-page.php:52 admin/parent-option-meta-box.php:11
 msgid "fade"
 msgstr "フェード"
 
-#: admin/option-page.php:53 admin/slider-option-meta-box.php:12
+#: admin/option-page.php:53 admin/parent-option-meta-box.php:12
 msgid "slide"
 msgstr "スライド"
 
-#: admin/option-page.php:55 admin/slider-option-meta-box.php:14
+#: admin/option-page.php:55 admin/parent-option-meta-box.php:14
 msgid "Select your animation type, \"fade\" or \"slide\""
 msgstr "スライドショーのアニメーションの種類を選択してください。"
 
-#: admin/option-page.php:62 admin/slider-option-meta-box.php:21
+#: admin/option-page.php:62 admin/parent-option-meta-box.php:21
 msgid "horizontal"
 msgstr "横方向"
 
-#: admin/option-page.php:63 admin/slider-option-meta-box.php:22
+#: admin/option-page.php:63 admin/parent-option-meta-box.php:22
 msgid "vertical"
 msgstr "縦方向"
 
-#: admin/option-page.php:65 admin/slider-option-meta-box.php:24
+#: admin/option-page.php:65 admin/parent-option-meta-box.php:24
 msgid "Select the sliding direction, \"horizontal\" or \"vertical\""
 msgstr ""
 "スライドショーのアニメーションが「スライド」の場合、画像が流れる方向を指定で"
@@ -156,46 +136,46 @@ msgstr ""
 
 #: admin/option-page.php:72 admin/option-page.php:96
 #: admin/option-page.php:106 admin/option-page.php:116
-#: admin/slider-option-meta-box.php:31 admin/slider-option-meta-box.php:55
-#: admin/slider-option-meta-box.php:65 admin/slider-option-meta-box.php:75
+#: admin/parent-option-meta-box.php:31 admin/parent-option-meta-box.php:55
+#: admin/parent-option-meta-box.php:65 admin/parent-option-meta-box.php:75
 msgid "Yes"
 msgstr "はい"
 
 #: admin/option-page.php:73 admin/option-page.php:97
 #: admin/option-page.php:107 admin/option-page.php:117
-#: admin/slider-option-meta-box.php:32 admin/slider-option-meta-box.php:56
-#: admin/slider-option-meta-box.php:66 admin/slider-option-meta-box.php:76
+#: admin/parent-option-meta-box.php:32 admin/parent-option-meta-box.php:56
+#: admin/parent-option-meta-box.php:66 admin/parent-option-meta-box.php:76
 msgid "No"
 msgstr "いいえ"
 
-#: admin/option-page.php:75 admin/slider-option-meta-box.php:34
+#: admin/option-page.php:75 admin/parent-option-meta-box.php:34
 msgid "Should the animation loop?"
 msgstr "アニメーションはループさせますか？"
 
-#: admin/option-page.php:82 admin/slider-option-meta-box.php:41
+#: admin/option-page.php:82 admin/parent-option-meta-box.php:41
 msgid "Set the speed of the slideshow cycling, in milliseconds"
 msgstr ""
 "スライドショーの周期(静止時間 + アニメーション時間)の長さを設定してくださ"
 "い。単位: ミリ秒(1／1000 秒)"
 
-#: admin/option-page.php:89 admin/slider-option-meta-box.php:48
+#: admin/option-page.php:89 admin/parent-option-meta-box.php:48
 msgid "Set the speed of animations"
 msgstr "スライドショーのアニメーション時間の長さを設定してください。"
 
-#: admin/option-page.php:99 admin/slider-option-meta-box.php:58
+#: admin/option-page.php:99 admin/parent-option-meta-box.php:58
 msgid ""
 "Pause the slideshow when hovering over slider, then resume when no longer "
 "hovering"
 msgstr ""
 "スライダーにマウスカーソルがのったとき、アニメーションを一時停止させますか？"
 
-#: admin/option-page.php:109 admin/slider-option-meta-box.php:68
+#: admin/option-page.php:109 admin/parent-option-meta-box.php:68
 msgid "Create navigation for paging control of each slide?"
 msgstr ""
 "スライドをページ選択できるよう、スライダーの下にナビゲーションボタンを設置し"
 "ますか？"
 
-#: admin/option-page.php:119 admin/slider-option-meta-box.php:78
+#: admin/option-page.php:119 admin/parent-option-meta-box.php:78
 msgid "Create navigation for previous/next navigation?"
 msgstr ""
 "スライダーの両サイドに、次のスライドに進むボタンと前のスライドに戻るボタンを"
@@ -225,68 +205,104 @@ msgstr "使用可能なスライドがありません。"
 msgid "Add Images to Slider"
 msgstr "選択画像をスライダーに追加"
 
-#: two-image-responsive-slider.php:75
+#: admin/slide-metabox.php:16
+msgid "Large Slide Image"
+msgstr "スライド画像（PC用）"
+
+#: admin/slide-metabox.php:17
+msgid "Small Slide Image"
+msgstr "スライド画像（スマホ用）"
+
+#: admin/slide-metabox.php:40
+msgid "Choose from Media Uploader"
+msgstr "メディアアップローダーから選択"
+
+#: admin/slide-metabox.php:40
+msgid "Choose Image"
+msgstr "この画像を選択"
+
+#: admin/slide-metabox.php:41
+msgid "Unset this Image"
+msgstr "選択を解除"
+
+#: admin/slide-metabox.php:43 admin/slide-metabox.php:45
+msgid "Width"
+msgstr "横幅"
+
+#: admin/slide-metabox.php:43 admin/slide-metabox.php:45
+msgid "Height"
+msgstr "縦幅"
+
+#: admin/slide-metabox.php:51
+msgid "Slide Link"
+msgstr "スライドのリンク先"
+
+#: admin/slide-metabox.php:55
+msgid "Open Link in New Tab"
+msgstr "新しいタブで開く"
+
+#: dual-size-responsive-slider.php:76
 msgctxt "post type general name"
 msgid "Slider"
 msgstr "スライダー"
 
-#: two-image-responsive-slider.php:76
+#: dual-size-responsive-slider.php:77
 msgctxt "post type singular name"
 msgid "Slide"
 msgstr "スライド"
 
-#: two-image-responsive-slider.php:77
+#: dual-size-responsive-slider.php:78
 msgctxt "admin menu"
 msgid "Slider"
 msgstr "スライダー"
 
-#: two-image-responsive-slider.php:78
+#: dual-size-responsive-slider.php:79
 msgctxt "add new on admin bar"
 msgid "Slider"
 msgstr "スライダー"
 
-#: two-image-responsive-slider.php:79
+#: dual-size-responsive-slider.php:80
 msgctxt "slider"
 msgid "Add New Slide"
 msgstr "スライド画像追加"
 
-#: two-image-responsive-slider.php:80
+#: dual-size-responsive-slider.php:81
 msgid "Add New"
 msgstr "新規追加"
 
-#: two-image-responsive-slider.php:81
+#: dual-size-responsive-slider.php:82
 msgid "New Slide"
 msgstr "新しいスライド"
 
-#: two-image-responsive-slider.php:82
+#: dual-size-responsive-slider.php:83
 msgid "Edit"
 msgstr "編集"
 
-#: two-image-responsive-slider.php:83
+#: dual-size-responsive-slider.php:84
 msgid "View Slider"
 msgstr "表示"
 
-#: two-image-responsive-slider.php:84
+#: dual-size-responsive-slider.php:85
 msgid "All Slider"
 msgstr "一覧"
 
-#: two-image-responsive-slider.php:85
+#: dual-size-responsive-slider.php:86
 msgid "Search Slides"
 msgstr "検索"
 
-#: two-image-responsive-slider.php:86
+#: dual-size-responsive-slider.php:87
 msgid "Parent Slider:"
 msgstr "親のスライダー"
 
-#: two-image-responsive-slider.php:87
+#: dual-size-responsive-slider.php:88
 msgid "No books found."
 msgstr "見つかりません"
 
-#: two-image-responsive-slider.php:88
+#: dual-size-responsive-slider.php:89
 msgid "No books found in Trash."
 msgstr "ゴミ箱には見つかりません"
 
-#: two-image-responsive-slider.php:287
+#: dual-size-responsive-slider.php:304
 msgid "There is no slide"
 msgstr "スライドがありません。"
 

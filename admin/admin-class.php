@@ -4,7 +4,7 @@
  * 管理画面のみに用いる関数をクラスにまとめる
  */
 
-class Two_Image_Slider_Admin {
+class DSRS_Admin {
 	
 	private $version = '';
 	
@@ -18,17 +18,17 @@ class Two_Image_Slider_Admin {
 	public function admin_menu() {
 		global $submenu;
 		$submenu['edit.php?post_type=responsive-slider'][11] = array(
-			__( 'Add New Set', 'tirs-text-domain' ),
+			__( 'Add New Set', DSRS ),
 			'edit_posts',
 			'/wp-admin/post-new.php?post_type=responsive-slider&parent=top',
 		);
 		ksort( $submenu['edit.php?post_type=responsive-slider'], SORT_NUMERIC );
 		
 		add_options_page(
-			__( 'Responsive Slider', 'tirs-text-domain' ),
-			__( 'Responsive Slider', 'tirs-text-domain' ),
+			__( 'Responsive Slider', DSRS ),
+			__( 'Responsive Slider', DSRS ),
 			'manage_options',
-			'two-image-responsive-slider',
+			'dual-size-responsive-slider',
 			array( $this, 'options_page' )
 		);
 	}
@@ -41,7 +41,7 @@ class Two_Image_Slider_Admin {
 	/* オプション画面からPOST送信があった場合、slide_option_saveを呼び出す */
 	public function admin_init() {
 		if ( isset( $_POST['slider_option_wpnonce'] ) && $_POST['slider_option_wpnonce'] ) {
-			if ( check_admin_referer( 'two-image-responsive-slider', 'slider_option_wpnonce' ) ) {
+			if ( check_admin_referer( 'dual-size-responsive-slider', 'slider_option_wpnonce' ) ) {
 				$this->slider_options_save();
 			}
 		}
@@ -52,13 +52,13 @@ class Two_Image_Slider_Admin {
 		
 		/* オプションキーの定義 登録値が数値になる場合はエラー文も定義 */
 		$numeric_key_and_errors = array(
-			'large-slider-width'             => array( 'field' => __( 'Large Slider Size', 'tirs-text-domain' ),  'key' => __( 'width', 'tirs-text-domain' ) ),
-			'large-slider-height'            => array( 'field' => __( 'Large Slider Size', 'tirs-text-domain' ),  'key' => __( 'height', 'tirs-text-domain' ) ),
-			'small-slider-width'             => array( 'field' => __( 'Small Slider Size', 'tirs-text-domain' ),  'key' => __( 'width', 'tirs-text-domain' ) ),
-			'small-slider-height'            => array( 'field' => __( 'Small Slider Size', 'tirs-text-domain' ),  'key' => __( 'height', 'tirs-text-domain' ) ),
-			'responsive-slider-change-width' => array( 'field' => __( 'Responsive Option', 'tirs-text-domain' ), 'key' => __( 'Threshold Width', 'tirs-text-domain' ) ),
-			'slider-slideshowSpeed'          => array( 'field' => __( 'Slider Option', 'tirs-text-domain' ),     'key' => 'slideshowSpeed' ),
-			'slider-animationSpeed'          => array( 'field' => __( 'Slider Option', 'tirs-text-domain' ),     'key' => 'animationSpeed' ),
+			'large-slider-width'             => array( 'field' => __( 'Large Slider Size', DSRS ), 'key' => __( 'width',  DSRS ) ),
+			'large-slider-height'            => array( 'field' => __( 'Large Slider Size', DSRS ), 'key' => __( 'height', DSRS ) ),
+			'small-slider-width'             => array( 'field' => __( 'Small Slider Size', DSRS ), 'key' => __( 'width',  DSRS ) ),
+			'small-slider-height'            => array( 'field' => __( 'Small Slider Size', DSRS ), 'key' => __( 'height', DSRS ) ),
+			'responsive-slider-change-width' => array( 'field' => __( 'Responsive Option', DSRS ), 'key' => __( 'Threshold Width', DSRS ) ),
+			'slider-slideshowSpeed'          => array( 'field' => __( 'Slider Option', DSRS ),     'key' => 'slideshowSpeed' ),
+			'slider-animationSpeed'          => array( 'field' => __( 'Slider Option', DSRS ),     'key' => 'animationSpeed' ),
 		);
 		$select_option_keys = array(
 			'slider-animation',
@@ -84,10 +84,10 @@ class Two_Image_Slider_Admin {
 		}
 		
 		/* 更新したこと示す文をトランジエントに保存 */
-		set_transient( 'responsive-slider-admin-save', array( __( 'Option is updated.', 'tirs-text-domain' ) ), 5 );
+		set_transient( 'responsive-slider-admin-save', array( __( 'Option is updated.', DSRS ) ), 5 );
 
 		/* 安全なリダイレクト */
-		wp_safe_redirect( menu_page_url( 'two-image-responsive-slider', false ) );
+		wp_safe_redirect( menu_page_url( 'dual-size-responsive-slider', false ) );
 	}
 
 	/* 数値のオプション値を保存する関数 エラー文あり */
@@ -98,7 +98,7 @@ class Two_Image_Slider_Admin {
 			} else {
 				$error_object->add(
 					'error',
-					sprintf( __( 'Please enter a numeric value in %1$s for %2$s.', 'tirs-text-domain' ), $error_texts['key'], $error_texts['field'] )
+					sprintf( __( 'Please enter a numeric value in %1$s for %2$s.', DSRS ), $error_texts['key'], $error_texts['field'] )
 				);
 			}
 		} else {
@@ -136,7 +136,7 @@ class Two_Image_Slider_Admin {
 			// メタボックス用のCSSファイル読み込み
 			wp_register_style(
 				'slide-metabox',
-				plugins_url( 'slide-metabox.css', __FILE__ ),
+				plugins_url( 'metabox.css', __FILE__ ),
 				array(),
 				$this->version,
 				'all'
@@ -146,14 +146,14 @@ class Two_Image_Slider_Admin {
 			if ( $this->is_parent_post() ) {
 				add_meta_box(
 					'responsive-slider-parent-field',
-					__( 'Slider Set', 'tirs-text-domain' ),
+					__( 'Slider Set', DSRS ),
 					array( $this, 'slide_parent_box' ),
 					'responsive-slider',
 					'normal'
 				);
 				add_meta_box(
 					'responsive-slider-option-field',
-					__( 'Slider Option', 'tirs-text-domain' ),
+					__( 'Slider Option', DSRS ),
 					array( $this, 'slide_option_meta' ),
 					'responsive-slider',
 					'normal'
@@ -162,7 +162,7 @@ class Two_Image_Slider_Admin {
 			} else {
 				add_meta_box(
 					'responsive-slider-custom-field',
-					__( 'Slide Images', 'tirs-text-domain' ),
+					__( 'Slide Images', DSRS ),
 					array( $this, 'slide_meta_box' ),
 					'responsive-slider',
 					'normal'
@@ -179,11 +179,11 @@ class Two_Image_Slider_Admin {
 	}
 	
 	public function slide_option_meta() {
-		include_once 'slider-option-meta-box.php';
+		include_once 'parent-option-meta-box.php';
 	}
 	
 	public function slide_meta_box() {
-		include_once 'metabox.php';
+		include_once 'slide-metabox.php';
 	}
 	
 	/* パーマリンクの代わりにスライダーの表示コードを出力 */
@@ -191,8 +191,8 @@ class Two_Image_Slider_Admin {
 		$return_html = '';
 		if ( $this->is_parent_post() && isset( $_GET['post'] ) ) {
 			$shortcode   = '<code>' . sprintf( '[responsive-slider id=%s]', esc_html( $_GET['post'] ) ) . '</code>';
-			$function    = '<code>' . sprintf( 'responsive_slider( %s )', esc_html( $_GET['post'] ) ) . '</code>';
-			$return_html = sprintf( __( 'Using shortcode %s or function %s, you can display this slider.', 'tirs-text-domain' ), $shortcode, $function );
+			$function    = '<code>' . esc_html( sprintf( '<?php responsive_slider( %s ); ?>', esc_html( $_GET['post'] ) ) ) . '</code>';
+			$return_html = sprintf( __( 'Using shortcode %s or function %s, you can display this slider.', DSRS ), $shortcode, $function );
 			$return_html = '<p class="information">' . $return_html . '</p>';
 		}
 		return $return_html;
@@ -208,7 +208,7 @@ class Two_Image_Slider_Admin {
 		if ( !isset( $_POST['slide_meta_wpnonce'] ) ) {
 			return $post_id;
 		}
-		if ( ! wp_verify_nonce( $_POST['slide_meta_wpnonce'], plugin_basename(TIRS_PLUGIN_FILE) ) ) {
+		if ( ! wp_verify_nonce( $_POST['slide_meta_wpnonce'], DSRS ) ) {
 			return $post_id;
 		}
 
@@ -255,7 +255,7 @@ class Two_Image_Slider_Admin {
 					$update_id = wp_update_post( $prev_child_post, false );
 					$e->add(
 						'save',
-						sprintf( __( 'Parent Attribute of Slide %1$s (post ID: %2$s) is also updated.', 'tirs-text-domain' ), $prev_child_post->post_title, $prev_child_post->ID )
+						sprintf( __( 'Parent Attribute of Slide %1$s (post ID: %2$s) is also updated.', DSRS ), $prev_child_post->post_title, $prev_child_post->ID )
 					);
 				}
 			}
@@ -272,7 +272,7 @@ class Two_Image_Slider_Admin {
 					$update_id = wp_update_post( $child_post, false );
 					$e->add(
 						'save',
-						sprintf( __( 'Parent Attribute of Slide %1$s (post ID: %2$s) is also updated.', 'tirs-text-domain' ), $child_post->post_title, $child_post->ID )
+						sprintf( __( 'Parent Attribute of Slide %1$s (post ID: %2$s) is also updated.', DSRS ), $child_post->post_title, $child_post->ID )
 					);
 				}
 			}
@@ -304,6 +304,9 @@ class Two_Image_Slider_Admin {
 	public function save_meta_value( $post_id = 0 ) {
 		$large_slide = isset( $_POST['large_slide_image'] ) ? $_POST['large_slide_image'] : '';
 		$small_slide = isset( $_POST['small_slide_image'] ) ? $_POST['small_slide_image'] : '';
+		$slide_link = isset( $_POST['slide_link'] ) ? $_POST['slide_link'] : '';
+		
+		// 画像のアタッチメントIDを保存
 		if ( ! empty( $large_slide ) ) {
 			update_post_meta( $post_id, 'large_slide_image', $large_slide );
 		} else {
@@ -313,6 +316,21 @@ class Two_Image_Slider_Admin {
 			update_post_meta( $post_id, 'small_slide_image', $small_slide );
 		} else {
 			delete_post_meta( $post_id, 'small_slide_image' );
+		}
+		
+		// リンク情報を保存
+		if ( ! empty( $slide_link ) ) {
+			update_post_meta( $post_id, 'slide_link', $slide_link );
+			if ( isset( $_POST['slide_link_target'] ) && '_blank' == $_POST['slide_link_target'] ) {
+				update_post_meta( $post_id, 'slide_link_target', true );
+			} else {
+				delete_post_meta( $post_id, 'slide_link_target' );
+			}
+		} else {
+			delete_post_meta( $post_id, 'slide_link' );
+			if ( get_post_meta( $post_id, 'slide_link_target', true ) ) {
+				delete_post_meta( $post_id, 'slide_link_target' );
+			}
 		}
 
 		return $large_slide;
@@ -407,8 +425,5 @@ class Two_Image_Slider_Admin {
 		}
 	}
 	
-	public function add_parent_box() {
-		
-	}
 }
 

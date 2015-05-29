@@ -4,7 +4,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit();
 }
 
-function two_image_responsive_slider_uninstaller() {
+function dual_size_responsive_slider_uninstaller() {
 
 	$option_keys = array(
 		'large-slider-width',
@@ -39,4 +39,4 @@ function two_image_responsive_slider_uninstaller() {
 	}
 }
 
-two_image_responsive_slider_uninstaller();
+dual_size_responsive_slider_uninstaller();

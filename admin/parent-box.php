@@ -7,7 +7,7 @@ if ( isset( $_GET['post'] ) ) {
 $slide_query2     = new WP_Query( get_responsive_slider_query_parameta() );
 ?>
 
-<?php wp_nonce_field( plugin_basename(TIRS_PLUGIN_FILE), 'slide_meta_wpnonce' ); ?> 
+<?php wp_nonce_field( DSRS, 'slide_meta_wpnonce' ); ?> 
 <input type="hidden" name="slide_parent" value="top" />
 
 <div class="slider-edit-wrap">
@@ -23,7 +23,7 @@ $slide_query2     = new WP_Query( get_responsive_slider_query_parameta() );
 					<img src="<?php echo esc_url( wp_get_attachment_url( get_post_meta( $post_id, 'large_slide_image', true ) ) ); ?>" height="50" />
 					<span class="slide-title"><?php the_title(); ?></span>
 					<div class="slide-controller">
-						<span class="slide-remove-button"><?php _e( 'Remove', 'tirs-text-domain' ); ?></span>
+						<span class="slide-remove-button"><?php _e( 'Remove', DSRS ); ?></span>
 						<span class="slide-move-button"><span class="up-button">▲</span><br /><span class="down-button">▼</span></span>
 					</div>
 					<input type="hidden" name="slide_children[<?php echo ( $li_count - 1 ); ?>]" value="<?php echo esc_attr( $post_id ); ?>" />
@@ -36,10 +36,10 @@ $slide_query2     = new WP_Query( get_responsive_slider_query_parameta() );
 		endif;
 		?> 
 	</ol>
-	<?php if ( 1 == $li_count ) : ?><p class="slider-no-slide"><?php _e( 'Please Add Slides from below.', 'tirs-text-domain' ); ?></p><?php endif; ?> 
+	<?php if ( 1 == $li_count ) : ?><p class="slider-no-slide"><?php _e( 'Please Add Slides from below.', DSRS ); ?></p><?php endif; ?> 
 </div>
 
-<h4><?php _e( 'Add Slides', 'tirs-text-domain' ); ?></h4>
+<h4><?php _e( 'Add Slides', DSRS ); ?></h4>
 <ul class="add-slides">
 	<?php
 	$no_slides = true;
@@ -65,13 +65,13 @@ $slide_query2     = new WP_Query( get_responsive_slider_query_parameta() );
 	endif;
 	?> 
 </ul>
-<?php if ( $no_slides ) : ?><p class="no-add-slide"><?php _e( 'There is no slide which you can use for this slider.', 'tirs-text-domain' ); ?></p><?php endif; ?> 
-<p><input type="button" id="add-slides-button" value="<?php _e( 'Add Images to Slider', 'tirs-text-domain' ); ?>" onClick="click_add_slide_button( event );" /></p>
+<?php if ( $no_slides ) : ?><p class="no-add-slide"><?php _e( 'There is no slide which you can use for this slider.', DSRS ); ?></p><?php endif; ?> 
+<p><input type="button" id="add-slides-button" value="<?php _e( 'Add Images to Slider', DSRS ); ?>" onClick="click_add_slide_button( event );" /></p>
 
 <script type="text/javascript">
 	var li_html_1  = '<img src="" height="50" />';
 	    li_html_1 += '<span class="slide-title"></span>';
-	    li_html_1 += '<div class="slide-controller"><span class="slide-remove-button"><?php _e( 'Remove', 'tirs-text-domain' ); ?></span>';
+	    li_html_1 += '<div class="slide-controller"><span class="slide-remove-button"><?php _e( 'Remove', DSRS ); ?></span>';
 	    li_html_1 += '<span class="slide-move-button"><span class="up-button">▲</span><br /><span class="down-button">▼</span></span></div>';
 	
 	var next_li = <?php echo $li_count; ?>;
@@ -85,7 +85,7 @@ $slide_query2     = new WP_Query( get_responsive_slider_query_parameta() );
 				add_new_slide( $, $( this ) . val() );
 			} );
 			if ( 0 === $( '.add-slides li' ) . length ) {
-				$( '.add-slides' ) . after( '<p class="no-add-slide"><?php _e( 'There is no slide which you can use for this slider.', 'tirs-text-domain' ); ?></p>' );
+				$( '.add-slides' ) . after( '<p class="no-add-slide"><?php _e( 'There is no slide which you can use for this slider.', DSRS ); ?></p>' );
 			}
 			$( '#add-slides-button' ) . prop( 'disabled', true );
 		} );
@@ -172,7 +172,7 @@ $slide_query2     = new WP_Query( get_responsive_slider_query_parameta() );
 				
 				if ( 1 === next_li ) {
 					wrap_element . css( 'height', '' );
-					wrap_element . append( '<p class="slider-no-slide"><?php _e( 'Please Add Slides from below.', 'tirs-text-domain' ); ?></p>' );
+					wrap_element . append( '<p class="slider-no-slide"><?php _e( 'Please Add Slides from below.', DSRS ); ?></p>' );
 				}
 				if ( 0 !== add_slide_message . length ) {
 					add_slide_message . remove();

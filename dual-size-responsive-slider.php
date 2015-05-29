@@ -1,32 +1,33 @@
 <?php
 
 /* 
- * Plugin Name: Two Image Responsive Slider
- * Description: This plugin displays slide show for responsive using FlexSlider2. You can set 2 images whose size is different, size for PC and smart phone.
- * Version: 1.0.0
+ * Plugin Name: Dual Size Responsive Slider
+ * Description: This plugin displays slide show for responsive using FlexSlider2. You can set 2 images its size is different, size for PC and smart phone.
+ * Version: 1.1.0
  * Author: Hiroki Kanazawa
  * License: GPLv2
  * Domain Path: /languages
  */
 
-define( 'TIRS_PLUGIN_FILE', __FILE__ );
-define( 'TIRS_PLUGIN_PATH', dirname(__FILE__) );
+define( 'DSRS_PLUGIN_FILE', __FILE__ );
+define( 'DSRS_PLUGIN_PATH', dirname(__FILE__) );
+define( 'DSRS', dirname( plugin_basename( __FILE__ ) ) );
 
-register_activation_hook(__FILE__, 'two_image_slider_activate');
+register_activation_hook(__FILE__, 'dual_size_responsive_slider_activate');
 
 /* 管理画面専用ファイルあり */
 if ( is_admin() ) {
 	include_once 'admin/admin-class.php';
 }
 
-$tir_slider_class = new Two_Image_Responsive_Slider();
-$tir_slider_class->register();
+$dsrs_class = new Dual_Size_Responsive_Slider();
+$dsrs_class->register();
 
-add_action( 'init', array( $tir_slider_class, 'init_register' ) );
+add_action( 'init', array( $dsrs_class, 'init_register' ) );
 
 /* オプション値の初期値を登録 */
-if ( ! function_exists( 'two_image_slider_activate' ) ) {
-	function two_image_slider_activate() {
+if ( ! function_exists( 'dual_size_responsive_slider_activate' ) ) {
+	function dual_size_responsive_slider_activate() {
 		$key_and_init = array(
 			'large-slider-width'             => 930,
 			'large-slider-height'            => 300,
@@ -51,7 +52,7 @@ if ( ! function_exists( 'two_image_slider_activate' ) ) {
 }
 
 
-class Two_Image_Responsive_Slider {
+class Dual_Size_Responsive_Slider {
 
 	private $version = '';
 	private $langs   = '';
@@ -72,20 +73,20 @@ class Two_Image_Responsive_Slider {
 	/* スライド画像はカスタム投稿タイプで登録 */
 	public function init_register() {
 		$labels = array(
-			'name'               => _x( 'Slider', 'post type general name', 'tirs-text-domain' ),
-			'singular_name'      => _x( 'Slide', 'post type singular name', 'tirs-text-domain' ),
-			'menu_name'          => _x( 'Slider', 'admin menu', 'tirs-text-domain' ),
-			'name_admin_bar'     => _x( 'Slider', 'add new on admin bar', 'tirs-text-domain' ),
-			'add_new'            => _x( 'Add New Slide', 'slider', 'tirs-text-domain' ),
-			'add_new_item'       => __( 'Add New', 'tirs-text-domain' ),
-			'new_item'           => __( 'New Slide', 'tirs-text-domain' ),
-			'edit_item'          => __( 'Edit', 'tirs-text-domain' ),
-			'view_item'          => __( 'View Slider', 'tirs-text-domain' ),
-			'all_items'          => __( 'All Slider', 'tirs-text-domain' ),
-			'search_items'       => __( 'Search Slides', 'tirs-text-domain' ),
-			'parent_item_colon'  => __( 'Parent Slider:', 'tirs-text-domain' ),
-			'not_found'          => __( 'No books found.', 'tirs-text-domain' ),
-			'not_found_in_trash' => __( 'No books found in Trash.', 'tirs-text-domain' ),
+			'name'               => _x( 'Slider', 'post type general name', DSRS ),
+			'singular_name'      => _x( 'Slide', 'post type singular name', DSRS ),
+			'menu_name'          => _x( 'Slider', 'admin menu', DSRS ),
+			'name_admin_bar'     => _x( 'Slider', 'add new on admin bar', DSRS ),
+			'add_new'            => _x( 'Add New Slide', 'slider', DSRS ),
+			'add_new_item'       => __( 'Add New', DSRS ),
+			'new_item'           => __( 'New Slide', DSRS ),
+			'edit_item'          => __( 'Edit', DSRS ),
+			'view_item'          => __( 'View Slider', DSRS ),
+			'all_items'          => __( 'All Slider', DSRS ),
+			'search_items'       => __( 'Search Slides', DSRS ),
+			'parent_item_colon'  => __( 'Parent Slider:', DSRS ),
+			'not_found'          => __( 'No books found.', DSRS ),
+			'not_found_in_trash' => __( 'No books found in Trash.', DSRS ),
 		);
 		$args = array(
 			'labels'             => $labels,
@@ -112,23 +113,23 @@ class Two_Image_Responsive_Slider {
 
 	public function plugins_loaded() {
 		load_plugin_textdomain(
-			'tirs-text-domain',
+			DSRS,
 			false,
 			dirname( plugin_basename(__FILE__) ) . $this->langs
 		);
 
 		if ( is_admin() ) {
 			global $pagenow;
-			$tirs_admin = new Two_Image_Slider_Admin( $this->version );
-			add_action( 'admin_menu', array( $tirs_admin, 'admin_menu' ) );
-			add_action( 'admin_init', array( $tirs_admin, 'admin_init' ) );
-			add_action( 'admin_notices', array( $tirs_admin, 'admin_notices' ) );
+			$dsrs_admin = new DSRS_Admin( $this->version );
+			add_action( 'admin_menu', array( $dsrs_admin, 'admin_menu' ) );
+			add_action( 'admin_init', array( $dsrs_admin, 'admin_init' ) );
+			add_action( 'admin_notices', array( $dsrs_admin, 'admin_notices' ) );
 			if ( 'post-new.php' == $pagenow || 'post.php' == $pagenow ) {
-				add_action( 'admin_menu', array( $tirs_admin, 'add_custom_box' ) );
-				add_action( 'save_post', array( $tirs_admin, 'check_meta_value' ) );
+				add_action( 'admin_menu', array( $dsrs_admin, 'add_custom_box' ) );
+				add_action( 'save_post', array( $dsrs_admin, 'check_meta_value' ) );
 			} elseif ( 'edit.php' == $pagenow ) {
-				add_filter( 'manage_posts_columns', array( $tirs_admin, 'manage_posts_columns' ), 15 );
-				add_filter( 'manage_pages_custom_column', array( $tirs_admin, 'manage_posts_custom_column' ), 10, 2 );
+				add_filter( 'manage_posts_columns', array( $dsrs_admin, 'manage_posts_columns' ), 15 );
+				add_filter( 'manage_pages_custom_column', array( $dsrs_admin, 'manage_posts_custom_column' ), 10, 2 );
 			}
 		} else {
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_script' ) );
@@ -163,7 +164,7 @@ class Two_Image_Responsive_Slider {
 		var slider = $(".flexslider");
 		var slide_images = $(".flexslider img");
 		if ( slider.length > 0 ) {
-			if ( window.innerWidth > <?php echo esc_attr( get_option( 'responsive-slider-change-width' ) ); ?> ) {
+			if ( window.innerWidth > <?php echo esc_js( get_option( 'responsive-slider-change-width' ) ); ?> ) {
 				slide_images.each( function() {
 					$( this ).attr( "src", $( this ).data( "large-slide" ) );
 				} );
@@ -254,13 +255,17 @@ if ( ! function_exists( 'responsive_slider' ) ) {
 			'option' => get_responsive_slider_option( $slider_id ),
 		);
 
+		// スライドリストのHTMLを生成
 		if ( $slide_query->have_posts() ) {
-			$html_format   = "<li><img class='slide-image-%s' alt='%s' data-large-slide='%s' data-small-slide='%s' /></li>";
+			$img_format = "<img class='slide-image-%s' alt='%s' data-large-slide='%s' data-small-slide='%s' />";
+			$a_format   = "<a href='%s'%s>%s</a>";
 
 			for ( $i = 0; $i < $slide_query->found_posts; $i++ ) {
 				$slide_query->the_post();
 				$post_id = get_the_ID();
+				$html    = '';
 
+				// 画像データ読み込み
 				$large_id = get_post_meta( $post_id, 'large_slide_image', true );
 				$small_id = get_post_meta( $post_id, 'small_slide_image', true );
 				if ( '' != $large_id && '' == $small_id ) {
@@ -271,20 +276,32 @@ if ( ! function_exists( 'responsive_slider' ) ) {
 				}
 				$large_images = wp_get_attachment_image_src( $large_id, 'large-slider' );
 				$small_images = wp_get_attachment_image_src( $small_id, 'small-slider' );
+				$html        .= sprintf( $img_format, $i, esc_attr( get_the_title() ), esc_url( is_array( $large_images ) ? $large_images[0] : '' ), esc_url( is_array( $small_images ) ? $small_images[0] : '' ) );
+				
+				// リンク情報を読み込み
+				$slide_link = get_post_meta( $post_id, 'slide_link', true );
+				if ( '' != $slide_link ) {
+					$html = sprintf( $a_format, esc_url( $slide_link ), get_post_meta( $post_id, 'slide_link_target', true ) ? " target='_blank'" : '', $html );
+				}
 
-				$slider['html'] .= sprintf( $html_format, $i, esc_attr( get_the_title() ), esc_url( is_array( $large_images ) ? $large_images[0] : '' ), esc_url( is_array( $small_images ) ? $small_images[0] : '' ) );
+				$slider['html'] .= '<li>' . $html . '</li>';
 			}
+			
+			// スタイル追加
 			if ( $slide_query->found_posts == 1 ) {
 				$slider['css'] .= ' margin-bottom: 0;';
 			}
 			wp_reset_postdata();
+			
+			// HTML 書き出し
 			?> 
 			<div class='flexslider' data-slider-option='<?php echo json_encode( $slider['option'] ); ?>' style='<?php echo $slider['css']; ?>'>
 				<ul class='slides'><?php echo $slider['html']; ?></ul>
 			</div>
 			<?php
+			
 		} else {
-			echo '<!-- ' .  __('There is no slide', 'tirs-text-domain') . ' -->';
+			echo '<!-- ' .  __('There is no slide', DSRS) . ' -->';
 		}
 	}
 }
